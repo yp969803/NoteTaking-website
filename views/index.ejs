@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RlandNotes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+      body{
+        background:rgb(241, 175, 186);
+        height:100%;
+      }
+      #mainheading{
+            color:rgb(225, 56, 90);
+            text-align: center;
+            font-family: cursive;
+            font-size: 2.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">RlandNotes</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="btn btn-success" aria-current="page" href="/articles/new">New_Note</a>
+            </li>
+            
+            
+            
+          </ul>
+          
+          <form action="/logout"    method="post">
+              <button type="submit" class="btn btn-secondary mx-2">Logout</button>
+         </form>
+          
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="text" id="search"   placeholder="Search by Notes Title" aria-label="Search">
+            
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+       
+        <h1 class="mb-4" id="mainheading">Note every moment of life with RlandNotes</h1>
+        <h2 class="mb-4">@Wellcome <%=name%>...</h2>
+         
+        
+        
+       <div class="container" id="article-list">
+        <%articles.forEach(article=>{%>
+          <div class="card mt-4 product">
+            <div class="card-body ">
+                <h3 class="card-title "><%=article.title%></h3>
+                <div class="card-subtitle text-muted mt-2"><%=article.createdAt%></div>
+                <div class="card-text mb-3"><%=article.description%></div>
+            </div>
+            <span><a href="/articles/<%=article.slug%>" class="btn btn-primary mx-2 my-1">Read More</a></span>
+            <form action="/articles/<%=article.id%>?_method=DELETE" method="POST" class="d-inline my-2 mx-2">
+              <button class="btn btn-danger " type="submit">Delete</button>
+            </form>
+        </div>
+        <%}) %>
+       </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>  
+    <script>
+      const storeitems=document.getElementById('article-list')
+      const product=document.querySelectorAll('.product')
+      const pname=storeitems.getElementsByTagName('h3')
+      
+      const searchbar=document.getElementById('search')
+      searchbar.addEventListener('keyup',(e)=>{
+        let searchval=e.target.value.toUpperCase()
+        for(var i=0;i<pname.length;i++){
+          let match=product[i].getElementsByTagName('h3')[0];
+          if(match){
+            let textValue=match.textContent||match.innerHTML
+            if(textValue.toUpperCase().indexOf(searchval)>-1){
+                  product[i].style.display=""
+            }
+            else{
+              product[i].style.display='none'
+            }
+          }
+
+        }
+      })
+    </script>
+</body>
+</html>
+
+
+                  
