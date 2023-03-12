@@ -1,0 +1,19 @@
+# NoteTaking-website
+2
+It is made using node and database used is mongodb
+3
+first clone the repo
+4
+go to folder and run vscode in it
+5
+in terminal type npm i and press and enter
+6
+then type node app.js and press enter
+7
+go to chrome and type localhost and press enter
+8
+singup with unique username and password
+9
+login with same username and password
+10
+create new notes
